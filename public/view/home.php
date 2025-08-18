@@ -1,7 +1,7 @@
 <?php 
- 
-?>
 
+require_once 'topnavigation.php';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +11,6 @@
 </head>
 <body>
     <p>This is Home</p>
-    <button>Login</button>
-    <button>Register</button>
+    
 </body>
 </html>

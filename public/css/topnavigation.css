@@ -1,0 +1,77 @@
+/* * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+} */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.topnav {
+    background-color: #d4d2d2;
+    color: rgb(7, 7, 7);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topnav .left-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.topnav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(7, 7, 7);
+    text-decoration: none;
+}
+
+.topnav a.nav-link {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.topnav a.nav-link:hover {
+    background-color: #555;
+}
+
+.topnav .profile {
+    display: flex;
+    align-items:center;
+}
+
+.topnav .profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.topnav .profile span {
+    font-size: 1rem;
+
+}
+
+.btn {
+    background-color: #28a745;
+    color: rgb(37, 37, 37);
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    width: 100px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin: 5px;
+}
