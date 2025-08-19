@@ -4,7 +4,7 @@ use app\controller\ExamController;
 use function app\database\DataConnection;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/examController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/questionController.php';
 
 $conn = DataConnection();
 $examController = new ExamController($conn);
