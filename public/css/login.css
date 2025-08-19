@@ -2,7 +2,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
 /* Full-width input fields */
-input[type=text]:focus, input[type=password]:focus, input[type=tel]:focus, input[type=email]:focus {
+input[type=text], input[type=password], input[type=tel], input[type=email], input[type=file]{
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -40,10 +40,14 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.cancelbtn, .signupbtn .psw{
   float: left;
   width: 50%;
 }
+.psw{
+   padding: 14px 20px;
+}
+
 
 /* Add padding to container elements */
 .container {
@@ -52,7 +56,7 @@ button:hover {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
