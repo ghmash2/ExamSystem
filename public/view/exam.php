@@ -29,11 +29,10 @@ $optionController = new OptionController($conn);
 
 <body>
   <div class="timer">
-    <h3>Time: <span id="time">60:00</span></h3>
+    <h3>Time: <span id="time">50:00</span></h3>
   </div>
-
+  <form action="../view/showResultOnSubmit.php" method="POST" id="exam_submit_form"> 
   <div class="exam-container">
-
     <div class="exam-header">
       <h1 class="exam-title">Exam Title</h1>
       <p>Answer all questions to the best of your ability</p>
@@ -58,7 +57,8 @@ $optionController = new OptionController($conn);
           <div class="options-container">
             <?php foreach ($options as $index => $option): ?>
               <div class="option"> <!-- <div class="option correct-answer"></div> -->
-                <input type="radio" id="option_<?=$question['id']?>_<?=$index?>" name="option_<?=$question['id']?>">
+                <input type="radio" id="option_<?=$question['id']?>_<?=$index?>" name="option_<?=$question['id']?>" 
+                       value="<?=$option['id']?>" data_correct="<?= $option['is_correct'] ? 1 : 0 ?>">
                 <label for="option_<?=$question['id']?>_<?=$index?>"><?= $option['title'] ?></label>
               </div>
             <?php endforeach; ?>
@@ -74,9 +74,10 @@ $optionController = new OptionController($conn);
     <div class="navigation">
       <button class="btn btn-prev">Previous</button>
       <button class="btn btn-next">Next</button>
-      <button class="btn btn-submit">Submit Exam</button>
+      <a href="../view/showResultOnSubmit.php"><button class="btn btn-submit">Submit Exam</button></a>
     </div>
   </div>
+  </form>
   <script>
     document.addEventListener('click', function(e){
       const optionDiv = e.target.closest('.option');
