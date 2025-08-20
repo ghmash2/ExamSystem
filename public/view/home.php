@@ -5,7 +5,7 @@ use function app\database\DataConnection;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/questionController.php';
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/examController.php';
 $conn = DataConnection();
 $examController = new ExamController($conn);
 $exams = $examController->getAllExam();
@@ -113,7 +113,7 @@ require 'topnavigation.php';
                             <?php if ($exam['is_login_required']): ?>
                                 <span class="login-required">Login Required</span>
                             <?php endif; ?>
-                            <a href="../view/exam.php">
+                            <a href="../view/exam.php?id=<?=$exam['id']?>" name="exam">
                                 <button class="exam-button">Start Exam</button>
                             </a>
                         </div>

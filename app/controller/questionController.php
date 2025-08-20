@@ -9,7 +9,9 @@ class QuestionController{
     }
     function getQuestionByExamId($id)
     {
-
+        $stmt = $this->conn->prepare("SELECT * FROM exam_question WHERE exam_id = :id");
+        $stmt->execute([":id" => $id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>
