@@ -9,7 +9,9 @@ class OptionController{
     }
     function getOptionByQuestionId($id)
     {
-        
+        $stmt = $this->conn->prepare("SELECT * FROM options WHERE question_id = :id");
+        $stmt->execute([":id" => $id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

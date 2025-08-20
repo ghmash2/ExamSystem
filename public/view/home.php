@@ -21,7 +21,7 @@ require 'topnavigation.php';
 
 <body>
     <h2>Exam List</h2>
-
+     
     <div class="exam-page">
         <!-- Left Sidebar -->
         <div class="sidebar">
