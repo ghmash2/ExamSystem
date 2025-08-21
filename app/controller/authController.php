@@ -55,7 +55,7 @@ class AuthController
   function logout()
   {
     session_destroy();
-    header("Location: home.php");
+    header("Location: ..");
   }
 
 

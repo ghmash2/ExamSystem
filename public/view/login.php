@@ -11,6 +11,9 @@ $authController = new AuthController($conn);
 if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
   $authController->login();
 }
+if (isset($_POST['logout']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+  $authController->logout();
+}
 require 'topnavigation.php';
 ?>
 <!DOCTYPE html>

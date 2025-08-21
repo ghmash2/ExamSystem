@@ -7,7 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/topnavigation.css">
+    <link rel="stylesheet" href="../css/topnavigation.css">
     <!-- <link rel="stylesheet" href="css/login.css"> -->
 </head>
 
@@ -30,7 +30,7 @@
                     <span><?= $_SESSION['user']['username'] ?></span>
                 </a>
 
-                <form action="/" method="post">
+                <form action="../view/login.php" method="post">
                     <button class="btn" style=" background-color: green;" type="submit" name="logout"
                         value=logout>Logout</button>
                 </form>

@@ -13,5 +13,14 @@ class OptionController{
         $stmt->execute([":id" => $id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    function getAnswerByQuestionId($id)
+    {
+        $stmt = $this->conn->prepare("
+                SELECT id FROM options 
+                WHERE question_id = ? AND is_correct = 1
+            ");
+        $stmt->execute([$id]);
+        return $stmt->fetchColumn();
+    }
 }
 ?>
