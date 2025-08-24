@@ -13,6 +13,12 @@ class ExamController{
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    function getAttemptOfExam($user_id, $exam_id)
+    {
+        $stmt =  $this->conn->prepare("SELECT COUNT(*) FROM user_answer WHERE exam_id = :exam_id AND user_id = :user_id");
+        $stmt->execute([":exam_id" => $exam_id, ":user_id" => $user_id]);
+        return $stmt->fetchAll();
+    }
 
 }
 ?>

@@ -6,6 +6,7 @@ use function app\database\DataConnection;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/questionController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/examController.php';
+
 $conn = DataConnection();
 $examController = new ExamController($conn);
 $exams = $examController->getAllExam();
@@ -113,6 +114,7 @@ require 'topnavigation.php';
                             <?php if ($exam['is_login_required']): ?>
                                 <span class="login-required">Login Required</span>
                             <?php endif; ?>
+                            
                             <a href="../view/exam.php?id=<?=$exam['id']?>" name="exam">
                                 <button class="exam-button">Start Exam</button>
                             </a>
@@ -123,39 +125,7 @@ require 'topnavigation.php';
         </div>
     </div>
 
-    <script>
-        // Basic search functionality
-        document.querySelector('.search-box input').addEventListener('input', function (e) {
-            const searchTerm = e.target.value.toLowerCase();
-            document.querySelectorAll('.exam-card').forEach(card => {
-                const title = card.querySelector('.exam-title').textContent.toLowerCase();
-                const tagline = card.querySelector('.exam-tagline').textContent.toLowerCase();
-                if (title.includes(searchTerm) || tagline.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Basic filter functionality
-        document.querySelectorAll('.filter-option input').forEach(checkbox => {
-            checkbox.addEventListener('change', function () {
-                const category = this.value;
-                const isChecked = this.checked;
-
-                // This is a basic implementation - you'll need to enhance it
-                // based on your actual filtering requirements
-                document.querySelectorAll('.exam-card').forEach(card => {
-                    const cardCategory = card.querySelector('.exam-category').textContent.toLowerCase();
-                    if (cardCategory.includes(category.toLowerCase())) {
-                        card.style.display = isChecked ? 'block' : 'none';
-                    }
-                });
-            });
-        });
-    </script>
-
+    
 </body>
 
 </html>

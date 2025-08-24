@@ -8,9 +8,11 @@ use function app\database\DataConnection;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/questionController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/optionController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/examController.php';
 if (!isset($_SESSION['user']['id']))
   die("Login First");
-
+   
+                
 $user_id = $_SESSION['user']['id'];
 $exam_id = "";
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -20,7 +22,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 }
 $conn = DataConnection();
 $questionController = new QuestionController($conn);
+$examController = new ExamController($conn);
 $questions = $questionController->getQuestionByExamId($exam_id);
+$attempt = $examController->getAttemptOfExam($user_id, $exam_id);
+
+if($attempt > 7) die("You completed Qouta of 7 for this examinaion");
+
 $optionController = new OptionController($conn);
 require 'topnavigation.php';
 ?>
