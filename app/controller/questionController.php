@@ -13,5 +13,11 @@ class QuestionController{
         $stmt->execute([":id" => $id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    function getQuestionTitleByQuestionId($id)
+    {
+        $stmt = $this->conn->prepare("SELECT title FROM exam_question WHERE id = :id");
+        $stmt->execute([":id" => $id]);
+        return $stmt->fetchColumn();
+    }
 }
 ?>

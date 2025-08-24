@@ -1,6 +1,7 @@
 <?php
 
 use app\controller\OptionController;
+use app\controller\QuestionController;
 use app\controller\ResultController;
 use function app\database\DataConnection;
 session_start();
@@ -11,6 +12,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/resultController.ph
 $conn = DataConnection();
 $optionController = new OptionController($conn);
 $resultController = new ResultController($conn);
+$questionController = new QuestionController($conn);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -24,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user_answer = (int) $value;
 
             $actual_answer = $optionController->getAnswerByQuestionId($question_id);
-            $resultController->saveUserAnswer($user_id, $exam_id, $question_id, $user_answer, $actual_answer);
             $answers[] = [
                 'question_id' => $question_id,
                 'user_answer' => $user_answer,
@@ -32,14 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
             $total++;
         }
-
     }
     $correct = 0;
     foreach ($answers as $answer) {
         if ($answer['user_answer'] == $answer['actual_answer'])
             $correct++;
     }
-
+    $resultController->saveUserAnswer($user_id, $exam_id, $answers, $total, $correct);
 }
 // if (!isset($_SESSION['user_id'])) {
 //     throw new Exception('User not logged in');
@@ -66,19 +66,35 @@ require 'topnavigation.php';
 <body>
     <h1>Result</h1>
     <div>Correct Answer: <?= $correct ?> / <?= $total ?></div>
-    <div>
-        <table>
-            <thead>
-                <th>Question</th>
-                <th>Correct Answer</th>
-                <th>Your Answer</th>
-            </thead>
-            <tbody>
-                <?php foreach ($answers as $answer): ?>
-                    
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+    <div class="questions-container">
+        <?php foreach ($answers as $answer): ?>
+            <?php $options = $optionController->getOptionByQuestionId($answer['question_id']); ?>
+            <div class="question">
+                <div class="question-header">
+                    <h3 class="question-title">
+                        <?= $questionController->getQuestionTitleByQuestionId($answer['question_id']) ?>
+                    </h3>
+                    <span class="question-type">Multiple Choice</span>
+                </div>
+
+                <div class="options-container">
+                    <?php foreach ($options as $index => $option): ?>
+                        <?php if ($option['id'] == $answer['actual_answer'] && $answer['user_answer']!= null): ?>
+                            <div class="option" style="border-color: green"><?= $option['title'] ?></div>
+                        <?php elseif ($option['id'] == $answer['user_answer'] && $answer['actual_answer'] != $answer['user_answer']): ?>
+                            <div class="option" style="border-color: red"><?= $option['title'] ?></div>
+                        <?php else: ?>
+                            <div class="option"><?= $option['title'] ?></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="question-footer">
+                    <!-- <span>Question ID: 102</span> -->
+                    <!-- <span class="status status-active">Active</span> -->
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 </body>
 

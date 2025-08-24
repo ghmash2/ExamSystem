@@ -8,7 +8,7 @@ use function app\database\DataConnection;
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/questionController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/optionController.php';
-if (!$_SESSION['user']['id'])
+if (!isset($_SESSION['user']['id']))
   die("Login First");
 
 $user_id = $_SESSION['user']['id'];
@@ -60,7 +60,7 @@ require 'topnavigation.php';
             </div>
 
             <div class="options-container">
-              <input type= "hidden" name="option_<?= $question['id'] ?>" value="NULL">
+              <input type="hidden" name="option_<?= $question['id'] ?>" value="NULL">
               <?php foreach ($options as $index => $option): ?>
                 <div class="option"> <!-- <div class="option correct-answer"></div> -->
                   <input type="radio" id="option_<?= $question['id'] ?>_<?= $index ?>" name="option_<?= $question['id'] ?>"
