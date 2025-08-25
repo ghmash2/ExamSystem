@@ -9,11 +9,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/questionController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/optionController.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/examController.php';
-if (!isset($_SESSION['user']['id']))
-  die("Login First");
-   
-                
-$user_id = $_SESSION['user']['id'];
 $exam_id = "";
 if (isset($_GET['id']) && !empty($_GET['id'])) {
   $exam_id = (int) $_GET['id'];
@@ -24,12 +19,17 @@ $conn = DataConnection();
 $questionController = new QuestionController($conn);
 $examController = new ExamController($conn);
 $questions = $questionController->getQuestionByExamId($exam_id);
-$attempt = $examController->getAttemptOfExam($user_id, $exam_id);
-
-if($attempt > 7) die("You completed Qouta of 7 for this examinaion");
-
 $optionController = new OptionController($conn);
-require 'topnavigation.php';
+if($examController->isLoginRequired($exam_id)){
+if (!isset($_SESSION['user']['id']))
+  die("Login First");
+                
+$user_id = $_SESSION['user']['id'];
+
+// $attempt = $examController->getAttemptOfExam($user_id, $exam_id);
+// if($attempt > 7) die("You completed Quota of 7 for this examinaion");
+}
+// require 'topnavigation.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,6 +44,7 @@ require 'topnavigation.php';
     <h3>Time: <span id="time">50:00</span></h3>
   </div>
   <form action="../view/showResultOnSubmit.php" method="POST" id="exam_submit_form">
+    <input type="hidden" name="is_login_required" value="<?=$examController->isLoginRequired($exam_id)?>">
     <div class="exam-container">
       <div class="exam-header">
         <h1 class="exam-title">Exam Title</h1>

@@ -22,7 +22,7 @@ require 'topnavigation.php';
 
 <body>
     <h2>Exam List</h2>
-     
+
     <div class="exam-page">
         <!-- Left Sidebar -->
         <div class="sidebar">
@@ -44,7 +44,7 @@ require 'topnavigation.php';
 
                     <div class="filter-option">
                         <label>
-                            <input type="checkbox" name="category" value="science"> Science
+                            <input type="checkbox" name="category" value="english"> Science
                         </label>
                     </div>
 
@@ -90,8 +90,8 @@ require 'topnavigation.php';
             <?php foreach ($exams as $exam): ?>
                 <div class="exam-card">
                     <div class="exam-header">
-                        <h3 class="exam-title"><?=$exam['title'] ? htmlspecialchars($exam['title']) : '' ?></h3>
-                        <p class="exam-tagline"><?=$exam['tagline'] ? htmlspecialchars($exam['tagline']) : '' ?></p>
+                        <h3 class="exam-title"><?= $exam['title'] ? htmlspecialchars($exam['title']) : '' ?></h3>
+                        <p class="exam-tagline"><?= $exam['tagline'] ? htmlspecialchars($exam['tagline']) : '' ?></p>
                     </div>
 
                     <div class="exam-body">
@@ -105,17 +105,19 @@ require 'topnavigation.php';
                             </span>
                         </div>
 
-                        <p class="exam-instruction"><?= $exam['instruction'] ? nl2br(htmlspecialchars($exam['instruction'])) : '' ?></p>
+                        <p class="exam-instruction">
+                            <?= $exam['instruction'] ? nl2br(htmlspecialchars($exam['instruction'])) : '' ?></p>
                     </div>
 
                     <div class="exam-footer">
-                        <span class="exam-category"><?=$exam['category_id'] ? htmlspecialchars($exam['category_id']) : '' ?></span>
+                        <span
+                            class="exam-category"><?= $exam['category_id'] ? htmlspecialchars($exam['category_id']) : '' ?></span>
                         <div>
                             <?php if ($exam['is_login_required']): ?>
                                 <span class="login-required">Login Required</span>
                             <?php endif; ?>
-                            
-                            <a href="../view/exam.php?id=<?=$exam['id']?>" name="exam">
+
+                            <a href="../view/exam.php?id=<?= $exam['id'] ?>" name="exam">
                                 <button class="exam-button">Start Exam</button>
                             </a>
                         </div>
@@ -124,8 +126,8 @@ require 'topnavigation.php';
             <?php endforeach; ?>
         </div>
     </div>
+    <script src="../js/home.js"></script>
 
-    
 </body>
 
 </html>

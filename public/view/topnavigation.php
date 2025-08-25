@@ -31,7 +31,7 @@
                 </a>
 
                 <form action="../view/login.php" method="post">
-                    <button class="btn" style=" background-color: green;" type="submit" name="logout"
+                    <button class="btn" style=" background-color: #176B87;" type="submit" name="logout"
                         value=logout>Logout</button>
                 </form>
             </div>

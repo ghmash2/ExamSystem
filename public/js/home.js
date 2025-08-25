@@ -2,16 +2,26 @@
 // Basic search functionality
 document.querySelector('.search-box input').addEventListener('input', function (e) {
     const searchTerm = e.target.value.toLowerCase();
-    document.querySelectorAll('.exam-card').forEach(card => {
+    displaySearchItem(searchTerm); 
+});
+function displaySearchItem(searchTerm) {
+    document.querySelectorAll('.exam-header').forEach(card => {
         const title = card.querySelector('.exam-title').textContent.toLowerCase();
         const tagline = card.querySelector('.exam-tagline').textContent.toLowerCase();
-        if (title.includes(searchTerm) || tagline.includes(searchTerm)) {
+
+        card.parentElement.style.display = 'block';
+        
+        if (searchTerm === '') {
+            card.style.display = 'block';
+        } else if (title.includes(searchTerm) || tagline.includes(searchTerm)) {
             card.style.display = 'block';
         } else {
-            card.style.display = 'none';
+            card.parentElement.style.display = 'none';
         }
     });
-});
+}
+
+
 
 // Basic filter functionality
 document.querySelectorAll('.filter-option input').forEach(checkbox => {
@@ -19,8 +29,6 @@ document.querySelectorAll('.filter-option input').forEach(checkbox => {
         const category = this.value;
         const isChecked = this.checked;
 
-        // This is a basic implementation - you'll need to enhance it
-        // based on your actual filtering requirements
         document.querySelectorAll('.exam-card').forEach(card => {
             const cardCategory = card.querySelector('.exam-category').textContent.toLowerCase();
             if (cardCategory.includes(category.toLowerCase())) {

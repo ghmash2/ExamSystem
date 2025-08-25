@@ -26,6 +26,7 @@ body {
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid #eaeaea;
+    background: #d4e7ff;
 }
 
 .exam-title {
@@ -54,7 +55,7 @@ body {
 }
 
 .question {
-    background: #fff;
+    background: #EEF5FF;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     padding: 10px;
@@ -116,7 +117,7 @@ body {
 
 .correct-answer {
     background-color: #e6ebf7;
-    border-color: #a3b6e9;
+    border-color: #176B87;
 }
 
 .question-footer {
@@ -180,12 +181,12 @@ body {
 }
 
 .btn-submit {
-    background: #27ae60;
+    background: #176B87;
     color: white;
 }
 
 .btn-submit:hover {
-    background: #219653;
+    background: #4096b3;
 }
 
 .timer {

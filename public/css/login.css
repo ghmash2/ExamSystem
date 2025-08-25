@@ -8,21 +8,21 @@ input[type=text], input[type=password], input[type=tel], input[type=email], inpu
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: #EEF5FF;
 }
 
 /* Add a background color when the inputs get focus */
 input[type=text]:focus, input[type=password]:focus, input[type=tel]:focus, input[type=email]:focus {
-  background-color: #ddd;
+  background-color: #EEF5FF;
   outline: none;
 }
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
+  background-color: #176B87;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 0px 0;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -33,16 +33,15 @@ button:hover {
   opacity:1;
 }
 
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn .psw{
+.cancelbtn, .signupbtn{
+  padding: 14px 20px;
   float: left;
-  width: 50%;
+  width: 47%;
+  margin: 10px;
+}
+.cancelbtn{
+  background-color: #f78282;
 }
 .psw{
    padding: 14px 20px;
@@ -64,7 +63,7 @@ button:hover {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: #474e5d;
+  background-color: #EEF5FF;
   padding-top: 50px;
 }
 
@@ -73,7 +72,8 @@ button:hover {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+  width: 60%; /* Could be more or less, depending on screen size */
 }
 
 /* Style the horizontal ruler */

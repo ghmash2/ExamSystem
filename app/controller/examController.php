@@ -19,6 +19,12 @@ class ExamController{
         $stmt->execute([":exam_id" => $exam_id, ":user_id" => $user_id]);
         return $stmt->fetchAll();
     }
+    function isLoginRequired($exam_id)
+    {
+        $stmt = $this->conn->prepare("SELECT is_login_required FROM exams WHERE id=:exam_id");
+        $stmt->execute([":exam_id"=> $exam_id]);
+        return $stmt->fetchColumn();
+    }
 
 }
 ?>
