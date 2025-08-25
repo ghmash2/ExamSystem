@@ -21,8 +21,6 @@ require 'topnavigation.php';
 </head>
 
 <body>
-    <h2>Exam List</h2>
-
     <div class="exam-page">
         <!-- Left Sidebar -->
         <div class="sidebar">
@@ -38,13 +36,13 @@ require 'topnavigation.php';
 
                     <div class="filter-option">
                         <label>
-                            <input type="checkbox" name="category" value="mathematics"> Mathematics
+                            <input type="checkbox" name="category" value="1"> Mathematics
                         </label>
                     </div>
 
                     <div class="filter-option">
                         <label>
-                            <input type="checkbox" name="category" value="english"> Science
+                            <input type="checkbox" name="category" value="2"> English
                         </label>
                     </div>
 
@@ -87,6 +85,7 @@ require 'topnavigation.php';
 
         <!-- Exam List -->
         <div class="exam-list">
+            <h2>Exam List</h2>
             <?php foreach ($exams as $exam): ?>
                 <div class="exam-card">
                     <div class="exam-header">

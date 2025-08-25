@@ -2,7 +2,7 @@
 // Basic search functionality
 document.querySelector('.search-box input').addEventListener('input', function (e) {
     const searchTerm = e.target.value.toLowerCase();
-    displaySearchItem(searchTerm); 
+    displaySearchItem(searchTerm);
 });
 function displaySearchItem(searchTerm) {
     document.querySelectorAll('.exam-header').forEach(card => {
@@ -10,7 +10,7 @@ function displaySearchItem(searchTerm) {
         const tagline = card.querySelector('.exam-tagline').textContent.toLowerCase();
 
         card.parentElement.style.display = 'block';
-        
+
         if (searchTerm === '') {
             card.style.display = 'block';
         } else if (title.includes(searchTerm) || tagline.includes(searchTerm)) {
@@ -26,14 +26,19 @@ function displaySearchItem(searchTerm) {
 // Basic filter functionality
 document.querySelectorAll('.filter-option input').forEach(checkbox => {
     checkbox.addEventListener('change', function () {
+        
         const category = this.value;
         const isChecked = this.checked;
 
-        document.querySelectorAll('.exam-card').forEach(card => {
+        document.querySelectorAll('.exam-footer').forEach(card => {
             const cardCategory = card.querySelector('.exam-category').textContent.toLowerCase();
-            if (cardCategory.includes(category.toLowerCase())) {
-                card.style.display = isChecked ? 'block' : 'none';
+
+            card.parentElement.style.display = 'block';
+            if(cardCategory.includes(category.toLowerCase()) && cardCategory.includes(isChecked)) {
+                card.style.display =  'block';
             }
+            else 
+                card.parentElement.style.display = 'none';
         });
     });
 });

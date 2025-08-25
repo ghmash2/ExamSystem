@@ -115,7 +115,7 @@ class AuthController
     //   ":user_id" => $id,
     //   ":role_id" => $roleId
     // ]);
-    header("Location: /home.php");
+    header("Location: ..");
     exit();
   }
 
