@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 use app\controller\AuthController;
 use function app\database\DataConnection;
 
@@ -38,7 +38,7 @@ require 'topnavigation.php';
   <div id="id01" class="modal">
     <span onclick="document.getElementById('id01').style.display='none'" class="close"
       title="Close Modal">&times;</span>
-    <form class="modal-content" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+    <form class="modal-content" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="POST">
 
       <div class="container">
         <label for="uname"><b>Username</b></label>

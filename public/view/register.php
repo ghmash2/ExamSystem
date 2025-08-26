@@ -27,7 +27,7 @@ require 'topnavigation.php';
     <div id="id02" class="modal">
         <span onclick="document.getElementById('id02').style.display='none'" class="close"
             title="Close Modal">&times;</span>
-        <form class="modal-content" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" enctype="multipart/form-data">
+        <form class="modal-content" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="POST" enctype="multipart/form-data">
             <div class="container">
                 <h1>Sign Up</h1>
                 <p>Please fill in this form to create an account.</p>
