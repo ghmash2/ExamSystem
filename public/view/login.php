@@ -47,7 +47,7 @@ require 'topnavigation.php';
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
 
-        <span class="psw">Forgot <a href="#">password?</a></span>
+        <span class="psw">Forgot <a href="/forgotPassword">password?</a></span>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>

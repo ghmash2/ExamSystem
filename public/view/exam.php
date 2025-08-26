@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 use app\controller\ExamController;
 use app\controller\OptionController;
 use app\controller\QuestionController;
@@ -90,7 +90,7 @@ $user_id = $_SESSION['user']['id'];
       <div class="navigation">
         <!-- <button class="btn btn-prev">Previous</button>
         <button class="btn btn-next">Next</button> -->
-        <a href="../view/showResultOnSubmit.php"><button class="btn btn-submit">Submit Exam</button></a>
+        <a href="/showResultOnSubmit"><button class="btn btn-submit">Submit Exam</button></a>
       </div>
     </div>
   </form>

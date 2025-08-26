@@ -116,7 +116,7 @@ require 'topnavigation.php';
                                 <span class="login-required">Login Required</span>
                             <?php endif; ?>
 
-                            <a href="../view/exam.php?id=<?= $exam['id'] ?>" name="exam">
+                            <a href="exam?id=<?= $exam['id'] ?>" name="exam">
                                 <button class="exam-button">Start Exam</button>
                             </a>
                         </div>

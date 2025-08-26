@@ -58,7 +58,7 @@ require 'topnavigation.php';
                     Remember me
                 </label>
 
-                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms &
+                <p>By creating an account you agree to our <a href="/termsPrivacy" style="color:dodgerblue">Terms &
                         Privacy</a>.</p>
 
                 <div class="clearfix">
