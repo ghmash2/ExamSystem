@@ -25,20 +25,18 @@ require 'topnavigation.php';
 </head>
 
 <body>
-  <!--  -->
-  <?php if (isset($_SESSION['user']['message'])): ?>
-    <div
-      style="color: red; padding: 10px; margin-bottom: 15px; border: 1px solid #ff9999; border-radius: 5px; background: #ffeeee;">
-      <?= $_SESSION['user']['message'] ?>
-    </div>
-    <?php unset($_SESSION['user']['message']); ?>
-  <?php endif; ?>
 
 
   <div id="id01" class="modal">
-    <span onclick="document.getElementById('id01').style.display='none'" class="close"
-      title="Close Modal">&times;</span>
+    <!-- <span onclick="document.getElementById('id01').style.display='none'" class="close"
+      title="Close Modal">&times;</span> -->
     <form class="modal-content" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="POST">
+      <?php if (isset($_SESSION['error'])): ?>
+        <div
+          style="color: red; padding: 10px; margin: 15px; border: 1px solid #ff9999; border-radius: 5px; background: #ffeeee;">
+          <?= htmlspecialchars($_SESSION['error']) ?></div>
+        <?php unset($_SESSION['error']); // clear after showing ?>
+      <?php endif; ?>
 
       <div class="container">
         <label for="uname"><b>Username</b></label>
@@ -47,14 +45,16 @@ require 'topnavigation.php';
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
 
-        <span class="psw">Forgot <a href="/forgotPassword">password?</a></span>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
+
+        <span class="psw"><a href="/forgotPassword">Forgot Password?</a></span>
+        <span class="psw">Don't have an account? <a href="/register">Register</a></span>
+
         <div class="clearfix">
+          <a href="/home"><button type="button" class="cancelbtn">Cancel</button></a>
           <button type="submit" name="login" class="signupbtn">Login</button>
-          <button type="button" onclick="document.getElementById('id01').style.display='none'"
-           class="cancelbtn" >Cancel</button>
         </div>
 
       </div>

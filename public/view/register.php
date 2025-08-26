@@ -1,5 +1,5 @@
-<?php 
- use app\controller\AuthController;
+<?php
+use app\controller\AuthController;
 use function app\database\DataConnection;
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
@@ -8,7 +8,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/authController.php'
 $conn = DataConnection();
 $authController = new AuthController($conn);
 if (isset($_POST['register']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
-  $authController->register();
+    $authController->register();
 }
 require 'topnavigation.php';
 ?>
@@ -25,10 +25,18 @@ require 'topnavigation.php';
     <!-- <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;" class="btn">Sign Up</button> -->
 
     <div id="id02" class="modal">
-        <span onclick="document.getElementById('id02').style.display='none'" class="close"
-            title="Close Modal">&times;</span>
-        <form class="modal-content" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="POST" enctype="multipart/form-data">
+        <!-- <span onclick="document.getElementById('id02').style.display='none'" class="close"
+            title="Close Modal">&times;</span> -->
+        <form class="modal-content" action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="POST"
+            enctype="multipart/form-data">
             <div class="container">
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div
+                        style="color: red; padding: 10px; margin: 15px; border: 1px solid #ff9999; border-radius: 5px; background: #ffeeee;">
+                        <?= htmlspecialchars($_SESSION['error']) ?>
+                    </div>
+                    <?php unset($_SESSION['error']); // clear after showing ?>
+                <?php endif; ?>
                 <h1>Sign Up</h1>
                 <p>Please fill in this form to create an account.</p>
                 <hr>
@@ -62,15 +70,14 @@ require 'topnavigation.php';
                         Privacy</a>.</p>
 
                 <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
-                        class="cancelbtn">Cancel</button>
+                    <a href="/home"><button type="button" class="cancelbtn">Cancel</button></a>
                     <button type="submit" class="signupbtn" name="register">Sign Up</button>
                 </div>
             </div>
         </form>
     </div>
 
-    <script>
+    <!-- <script>
         // Get the modal
         var modal = document.getElementById('id02');
 
@@ -80,7 +87,7 @@ require 'topnavigation.php';
                 modal.style.display = "none";
             }
         }
-    </script>
+    </script> -->
 </body>
 
 </html>

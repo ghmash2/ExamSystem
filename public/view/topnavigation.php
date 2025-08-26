@@ -30,7 +30,7 @@
                     <span><?= $_SESSION['user']['username'] ?></span>
                 </a>
 
-                <form action="../view/login.php" method="post">
+                <form action="/login" method="post">
                     <button class="btn" style=" background-color: #176B87;" type="submit" name="logout"
                         value=logout>Logout</button>
                 </form>

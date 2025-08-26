@@ -10,14 +10,14 @@ class AuthController
   {
     $this->conn = $conn;
   }
-  function login() 
+  function login()
   {
     $username = htmlspecialchars($_POST["uname"]);
     $password = htmlspecialchars($_POST["psw"]);
     $stmt = $this->conn->prepare("SELECT * FROM users WHERE username = :username");
     $stmt->execute([":username" => $username]);
     $user = $stmt->fetch();
-    
+
     // $role = $this->adminController->getRoleId($user["id"]);
     if ($user) {
       if ($user && password_verify($password, $user["password"])) {
@@ -27,27 +27,19 @@ class AuthController
           'username' => $user['username'],
           'image' => $user['photo'],
           'email' => $user['email'],
-          // 'role' => $role,
-          'message' => ""
         ];
-        // die("Successfully Login!!!");
-        $_SESSION['user']['message'] = "Successfully Logged in!";
-        //var_dump($_SESSION["user"]);
         header("Location: ..");
         exit();
       } else {
-         die("Password Incorrect!!!");
-        // $_SESSION['user']['message'] = "Incorrect password!";
-        // header("Location: login.php");
-        // exit();
+        $_SESSION['error'] = "Invalid email or password!";
+        header("Location: /login");
+        exit();
 
       }
     } else {
-          die("Not Registered Yet!!!");
-      // $_SESSION['user']['message'] = "Not Registered Yet!!!";
-
-      // header("Location: login.php");
-      // exit();
+      $_SESSION['error'] = "Not Registered Yet!!!";
+      header("Location: login");
+      exit();
     }
 
   }
@@ -75,10 +67,28 @@ class AuthController
       return "PDO Error: " . $e;
     }
     if ($result) {
-      die("Username Already Exist!!!");
+      $_SESSION['error'] = "Username Already Exist!!!";
+      header("Location: /register");
+      exit();
     }
+
+    try {
+      $stmt = $this->conn->prepare("SELECT email FROM users WHERE email = :email");
+      $stmt->execute([":email" => $email]);
+      $result = $stmt->fetchAll();
+    } catch (PDOException $e) {
+      return "PDO Error: " . $e;
+    }
+    if ($result) {
+      $_SESSION['error'] = "Email Already Exist!!!";
+      header("Location: /register");
+      exit();
+    }
+
     if ($password != $repassword) {
-      die("Password Does not match!!");
+      $_SESSION['error'] = "Re-Password Does not match!!";
+      header("Location: /register");
+      exit();
     }
     $password = password_hash($password, PASSWORD_DEFAULT);
     // if (!isset($_FILES['image']) || $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
@@ -93,7 +103,6 @@ class AuthController
     $imageName = basename($_FILES["image"]["name"]);
     $targetPath = $targetDir . $imageName;
     move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath);
-
 
 
     $stmt = $this->conn->prepare("INSERT INTO users(name, username, email, photo, contact, password) 
@@ -115,7 +124,7 @@ class AuthController
     //   ":user_id" => $id,
     //   ":role_id" => $roleId
     // ]);
-    header("Location: ..");
+    header("Location: /login");
     exit();
   }
 

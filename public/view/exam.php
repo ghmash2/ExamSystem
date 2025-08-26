@@ -22,7 +22,7 @@ $questions = $questionController->getQuestionByExamId($exam_id);
 $optionController = new OptionController($conn);
 if($examController->isLoginRequired($exam_id)){
 if (!isset($_SESSION['user']['id']))
-  die("Login First");
+  header("Location: /login");
                 
 $user_id = $_SESSION['user']['id'];
 
