@@ -22,5 +22,11 @@ class OptionController{
         $stmt->execute([$id]);
         return $stmt->fetchColumn();
     }
+    function getTitleByOptionId($option_id)
+    {
+        $stmt = $this->conn->prepare("SELECT title FROM options WHERE id = :option_id");
+        $stmt->execute([":option_id"=> $option_id]);
+        return $stmt->fetchColumn();
+    }
 }
 ?>

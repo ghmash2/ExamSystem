@@ -101,7 +101,7 @@ class AuthController
     // }
     $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/user_img/";
     $imageName = basename($_FILES["image"]["name"]);
-    $targetPath = $targetDir . $imageName;
+    $targetPath = $targetDir . $imageName . htmlspecialchars($_POST["username"]);
     move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath);
 
 

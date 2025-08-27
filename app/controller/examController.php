@@ -25,6 +25,12 @@ class ExamController{
         $stmt->execute([":exam_id"=> $exam_id]);
         return $stmt->fetchColumn();
     }
+    function getExamNameById($exam_id)
+    {
+        $stmt = $this->conn->prepare("SELECT title FROM exams WHERE id=:exam_id");
+        $stmt->execute([":exam_id"=> $exam_id]);
+        return $stmt->fetchColumn();
+    }
 
 }
 ?>

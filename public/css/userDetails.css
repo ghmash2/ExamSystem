@@ -1,0 +1,219 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    max-width: 1400px;
+    margin: 10px auto;
+    gap: 10px;
+    padding: 0 15px;
+}
+
+/* Left Sidebar - Profile Section */
+.profile-sidebar {
+    flex: 0 0 300px;
+    background: linear-gradient(135deg, #B4D4FF 0%, #EEF5FF 100%);
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: 700px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    margin: 0 auto 15px;
+}
+
+.profile-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.profile-username {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+.profile-details {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.detail-item {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+}
+
+.detail-icon {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    background: #EEF5FF;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Exam History Cards */
+.exam-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.exam-card {
+    background: #B4D4FF;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.exam-card:hover {
+    transform: translateY(-5px);
+}
+
+.exam-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.exam-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.exam-detail .label {
+    color: #777;
+}
+
+.exam-detail .value {
+    font-weight: 500;
+}
+
+.score {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.score-high {
+    background: #e6f7ee;
+    color: #28a745;
+}
+
+.score-medium {
+    background: #fff8e6;
+    color: #ffc107;
+}
+
+.score-low {
+    background: #ffe6e6;
+    color: #dc3545;
+}
+
+/* Questions Table */
+.questions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.questions-table th,
+.questions-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.questions-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.questions-table tr:hover {
+    background-color: #f9fafc;
+}
+
+.status-correct {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.status-incorrect {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .profile-sidebar {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .exam-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .questions-table {
+        display: block;
+        overflow-x: auto;
+    }
+}

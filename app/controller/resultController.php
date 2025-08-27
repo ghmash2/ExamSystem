@@ -29,9 +29,6 @@ class ResultController
         foreach ($answers as $answer) {
             $stmt->execute([$id, $answer['question_id'], $answer['actual_answer'], $answer['user_answer']]);
         }
-
-
-
         //     $stmt = $this->conn->prepare("
         //         UPDATE user_answer_option 
         //         SET user_answer = :user_answer
@@ -39,6 +36,24 @@ class ResultController
         //     ");
         //     $stmt->execute([":user_id" => $user_id, ":exam_id" => $exam_id,":question_id"=> $question_id, ":user_answer" => $user_answer]);
         // 
+    }
+    function getExamByUserId($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM exams WHERE id IN (SELECT DISTINCT(exam_id) FROM user_answer WHERE user_id=:user_id)");
+        $stmt->execute([":user_id" => $id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getExamsAttempts($user_id, $exam_id)
+    {
+        $stmt = $this->conn->prepare("SELECT id FROM user_answer WHERE user_id=:user_id AND exam_id=:exam_id ORDER BY id DESC");
+        $stmt->execute([":user_id" => $user_id, ":exam_id" => $exam_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function getResultOfEachQuestion($user_answer_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM user_answer_option WHERE user_answer_id =:user_answer_id");
+        $stmt->execute([":user_answer_id" => $user_answer_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

@@ -16,9 +16,11 @@ $routes = [
     'register' => '/view/register.php',
     'showResultOnSubmit' => '/view/showResultOnSubmit.php',
     'exam' => '/view/exam.php',
+    'profile' => '/view/profile.php',
+    'resultHistory' => '/view/resultHistory.php',
     // 'forgotPassword' => '/view/forgotPassword.php',
-    // 'termsPrivacy' => '/view/termsPrivacy.php',
-    // 'profile' => '/view/profile.php',
+    // 'termsPrivacy' => '/view/termsPrivacy.php', 
+
 ];
 
 if (isset($routes[$route])) {

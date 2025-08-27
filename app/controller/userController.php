@@ -7,5 +7,11 @@ class UserController{
     {
         $this->conn = $conn;
     }
+    function getUserById($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE id=:id");
+        $stmt->execute([":id"=>$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>
