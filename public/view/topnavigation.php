@@ -26,7 +26,7 @@
                 <!--  -->
 
                 <a href="\profile?id=<?= $_SESSION['user']['id'] ?>" style="color: #e5ecf3ff; text-decoration: none;">
-                    <img src="/uploads/user_img/<?= $_SESSION['user']['image'] ?>" alt="Profile">
+                    <img src="../uploads/user_img/<?= $_SESSION['user']['image'] ?: 'default.png' ?>" alt="Profile">
                     <span><?= $_SESSION['user']['username'] ?></span>
                 </a>
 

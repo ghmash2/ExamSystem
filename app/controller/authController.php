@@ -100,8 +100,8 @@ class AuthController
     //   die('Upload failed with error code: ' . $_FILES['image']['error']);
     // }
     $targetDir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/user_img/";
-    $imageName = basename($_FILES["image"]["name"]);
-    $targetPath = $targetDir . $imageName . htmlspecialchars($_POST["username"]);
+    $imageName = basename($_FILES["image"]["name"]) . htmlspecialchars($_POST["username"]);
+    $targetPath = $targetDir . $imageName;
     move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath);
 
 

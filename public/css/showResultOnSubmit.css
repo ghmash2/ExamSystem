@@ -90,6 +90,7 @@ body {
 
 .option {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 5px 5px;
     margin-bottom: 10px;
@@ -118,6 +119,7 @@ body {
     background-color: #e6ebf7;
     border-color: #a3b6e9;
 }
+
 
 .question-footer {
     display: flex;

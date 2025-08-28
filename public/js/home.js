@@ -24,21 +24,43 @@ function displaySearchItem(searchTerm) {
 
 
 // Basic filter functionality
-document.querySelectorAll('.filter-option input').forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        
-        const category = this.value;
-        const isChecked = this.checked;
-
-        document.querySelectorAll('.exam-footer').forEach(card => {
-            const cardCategory = card.querySelector('.exam-category').textContent.toLowerCase();
-
-            card.parentElement.style.display = 'block';
-            if(cardCategory.includes(category.toLowerCase()) && cardCategory.includes(isChecked)) {
-                card.style.display =  'block';
-            }
-            else 
-                card.parentElement.style.display = 'none';
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryCheckboxes = document.querySelectorAll('input[name="category"]');
+    const examElements = document.querySelectorAll('.exam-card');
+    
+    const categoryMap = {
+        'mathematics': '1',
+        'english': '2',
+        'history': '3', 
+        'language': '4',
+        'technology': '5'
+    };
+    
+    categoryCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterExams);
     });
+    
+    function filterExams() {
+        const selectedCategories = Array.from(categoryCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => categoryMap[checkbox.value] || checkbox.value);
+        
+        if (selectedCategories.length === 0) {
+            examElements.forEach(exam => exam.style.display = 'block');
+            return;
+        }
+        
+        examElements.forEach(exam => {
+            const examCategoryElement = exam.querySelector('.exam-category');
+            if (!examCategoryElement) return;
+            
+            const examCategory = examCategoryElement.textContent.trim();
+            
+            if (selectedCategories.includes(examCategory)) {
+                exam.style.display = 'block';
+            } else {
+                exam.style.display = 'none';
+            }
+        });
+    }
 });

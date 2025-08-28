@@ -36,13 +36,13 @@ require 'topnavigation.php';
 
                     <div class="filter-option">
                         <label>
-                            <input type="checkbox" name="category" value="1"> Mathematics
+                            <input type="checkbox" name="category" value="mathematics"> Mathematics
                         </label>
                     </div>
 
                     <div class="filter-option">
                         <label>
-                            <input type="checkbox" name="category" value="2"> English
+                            <input type="checkbox" name="category" value="english"> English
                         </label>
                     </div>
 
@@ -65,7 +65,7 @@ require 'topnavigation.php';
                     </div>
                 </div>
 
-                <div class="filter-group">
+                <!-- <div class="filter-group">
                     <h4>Requirements</h4>
 
                     <div class="filter-option">
@@ -79,7 +79,7 @@ require 'topnavigation.php';
                             <input type="checkbox" name="requirement" value="free"> Free Access
                         </label>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 

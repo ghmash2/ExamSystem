@@ -164,7 +164,7 @@ body {
 
 /* Questions Table */
 .questions-table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -172,7 +172,7 @@ body {
 .questions-table th,
 .questions-table td {
     padding: 12px 15px;
-    text-align: left;
+    text-align: center;
     border-bottom: 1px solid #eee;
 }
 

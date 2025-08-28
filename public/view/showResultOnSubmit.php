@@ -40,7 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($answer['user_answer'] == $answer['actual_answer'])
             $correct++;
     }
-    if($login_required) {$resultController->saveUserAnswer($user_id, $exam_id, $answers, $total, $correct);}
+    if ($login_required) {
+        $resultController->saveUserAnswer($user_id, $exam_id, $answers, $total, $correct);
+    }
 }
 // if (!isset($_SESSION['user_id'])) {
 //     throw new Exception('User not logged in');
@@ -80,10 +82,18 @@ require 'topnavigation.php';
 
                 <div class="options-container">
                     <?php foreach ($options as $index => $option): ?>
-                        <?php if ($option['id'] == $answer['actual_answer'] && $answer['user_answer']!= null): ?>
-                            <div class="option" style="border-color: green"><?= $option['title'] ?></div>
-                        <?php elseif ($option['id'] == $answer['user_answer'] && $answer['actual_answer'] != $answer['user_answer']): ?>
-                            <div class="option" style="border-color: red"><?= $option['title'] ?></div>
+                        <?php if ($answer['user_answer'] != null && $option['id'] == $answer['user_answer'] && $answer['actual_answer'] == $answer['user_answer'] ): ?>
+                            <div class="option" style="border-color: green"><span><?= htmlspecialchars($option['title']) ?></span>
+                                <span style="color: green;">Correct✔️</span>
+                            </div>
+                        <?php elseif ($answer['user_answer'] != null && $option['id'] == $answer['user_answer'] && $answer['actual_answer'] != $answer['user_answer']): ?>
+                            <div class="option" style="border-color: red"><span><?= htmlspecialchars($option['title']) ?></span>
+                                <span style="color: red;">Not Correct❌</span>
+                            </div>
+                        <?php elseif ($option['id'] == $answer['actual_answer'] && $answer['user_answer'] == null): ?>
+                            <div class="option" style="border-color: green"><span><?= htmlspecialchars($option['title']) ?></span>
+                              <span style="color: grey">Not Answered✖</span>
+                            </div>
                         <?php else: ?>
                             <div class="option"><?= $option['title'] ?></div>
                         <?php endif; ?>

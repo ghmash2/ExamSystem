@@ -43,7 +43,8 @@ $count = count($attempts);
     <?php foreach ($attempts as $attempt): ?>
 
         <?php $rows = $resultController->getResultOfEachQuestion($attempt['id']); ?>
-        <div>Attempt No: <?= $count-- ?></div>
+        <div class="container">
+        <div class="">Attempt No: <?= $count-- ?></div>
         <table class="questions-table">
             <thead>
                 <tr>
@@ -68,6 +69,7 @@ $count = count($attempts);
                 <?php endforeach; ?>
             </tbody>
         </table>
+        </div>
     <?php endforeach; ?>
 
 
