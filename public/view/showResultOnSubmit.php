@@ -44,6 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $resultController->saveUserAnswer($user_id, $exam_id, $answers, $total, $correct);
     }
 }
+else{
+    header("Location: ..");
+}
 // if (!isset($_SESSION['user_id'])) {
 //     throw new Exception('User not logged in');
 // }

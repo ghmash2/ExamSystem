@@ -18,6 +18,7 @@ $routes = [
     'exam' => '/view/exam.php',
     'profile' => '/view/profile.php',
     'resultHistory' => '/view/resultHistory.php',
+    'addExam' => '/view/addExam.php',
     // 'forgotPassword' => '/view/forgotPassword.php',
     // 'termsPrivacy' => '/view/termsPrivacy.php', 
 

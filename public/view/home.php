@@ -86,6 +86,7 @@ require 'topnavigation.php';
         <!-- Exam List -->
         <div class="exam-list">
             <h2>Exam List</h2>
+            <a href="/addExam" style=""><button class="btn">Add Exam</button></a>
             <?php foreach ($exams as $exam): ?>
                 <div class="exam-card">
                     <div class="exam-header">

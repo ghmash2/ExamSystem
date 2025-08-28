@@ -26,6 +26,7 @@ if (isset($_GET['user_id']))
 
 $attempts = $resultController->getExamsAttempts($user_id, $exam_id);
 $count = count($attempts);
+require 'topnavigation.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,42 +34,42 @@ $count = count($attempts);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/userDetails.css">
+    <link rel="stylesheet" href="../css/resultHistory.css">
     <title>Result</title>
 
 </head>
 
 <body>
-    <h2 class="section-title">Exam Details: <?=$examController->getExamNameById($exam_id)?></h2>
+    <h2 class="section-title">Exam Details: <?= $examController->getExamNameById($exam_id) ?></h2>
     <?php foreach ($attempts as $attempt): ?>
 
         <?php $rows = $resultController->getResultOfEachQuestion($attempt['id']); ?>
         <div class="container">
-        <div class="">Attempt No: <?= $count-- ?></div>
-        <table class="questions-table">
-            <thead>
-                <tr>
-                    <th>Question</th>
-                    <th>Your Answer</th>
-                    <th>Correct Answer</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($rows as $row): ?>
+            <div class="">Attempt No: <?= $count-- ?></div>
+            <table class="questions-table">
+                <thead>
                     <tr>
-                        <td><?= $questionController->getQuestionTitleByQuestionId($row['question_id']) ?></td>
-                        <td><?= $optionController->getTitleByOptionId($row['user_answer']) ?></td>
-                        <td><?= $optionController->getTitleByOptionId($row['solution_no']) ?></td>
-                        <?php if ($row['user_answer'] == $row['solution_no']): ?>
-                            <td class="status-correct">Correct</td>
-                        <?php else: ?>
-                            <td class="status-incorrect">Incorrect</td>
-                        <?php endif; ?>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+                        <th>Correct Answer</th>
+                        <th>Status</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($rows as $row): ?>
+                        <tr>
+                            <td><?= $questionController->getQuestionTitleByQuestionId($row['question_id']) ?></td>
+                            <td><?= $optionController->getTitleByOptionId($row['user_answer']) ?></td>
+                            <td><?= $optionController->getTitleByOptionId($row['solution_no']) ?></td>
+                            <?php if ($row['user_answer'] == $row['solution_no']): ?>
+                                <td class="status-correct">Correct</td>
+                            <?php else: ?>
+                                <td class="status-incorrect">Incorrect</td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     <?php endforeach; ?>
 

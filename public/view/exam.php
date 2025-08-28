@@ -13,13 +13,14 @@ $exam_id = "";
 if (isset($_GET['id']) && !empty($_GET['id'])) {
   $exam_id = (int) $_GET['id'];
 } else {
-  die("No exam is selected");
+  header("Location: ..");
 }
 $conn = DataConnection();
 $questionController = new QuestionController($conn);
 $examController = new ExamController($conn);
 $questions = $questionController->getQuestionByExamId($exam_id);
 $optionController = new OptionController($conn);
+$exam = $examController->getExamById($exam_id);
 if($examController->isLoginRequired($exam_id)){
 if (!isset($_SESSION['user']['id']))
   header("Location: /login");
@@ -40,21 +41,22 @@ $user_id = $_SESSION['user']['id'];
 </head>
 
 <body>
+   <a href="/home"><button class="btn">Cancel</button></a>
   <div class="timer">
-    <h3>Time: <span id="time">50:00</span></h3>
+    <h3><span id="time"><?=$exam['duration']?></span></h3>
   </div>
   <form action="../view/showResultOnSubmit.php" method="POST" id="exam_submit_form">
     <input type="hidden" name="is_login_required" value="<?=$examController->isLoginRequired($exam_id)?>">
     <div class="exam-container">
       <div class="exam-header">
-        <h1 class="exam-title">Exam Title</h1>
+        <h1 class="exam-title"><?=$exam['title']?></h1>
         <p>Answer all questions to the best of your ability</p>
         <div class="exam-info">
           <div class="info-item">
-            <span>Total Questions: (countQuestion)</span>
+            <span>Total Questions: <?=count($questions)?></span>
           </div>
           <div class="info-item">
-            <span>Time Limit: (exam_duration)</span>
+            <span>Mark: <?=$exam['full_mark']?></span>
           </div>
         </div>
       </div>
@@ -64,7 +66,7 @@ $user_id = $_SESSION['user']['id'];
           <div class="question">
             <div class="question-header">
               <h3 class="question-title"><?= $question['title'] ?></h3>
-              <span class="question-type">Multiple Choice</span>
+              <span class="question-type"><?= $question['question_type'] ?></span>
             </div>
 
             <div class="options-container">
@@ -90,6 +92,7 @@ $user_id = $_SESSION['user']['id'];
       <div class="navigation">
         <!-- <button class="btn btn-prev">Previous</button>
         <button class="btn btn-next">Next</button> -->
+       
         <a href="/showResultOnSubmit"><button class="btn btn-submit">Submit Exam</button></a>
       </div>
     </div>

@@ -12,6 +12,9 @@ use function app\database\DataConnection;
   $exams = $resultController->getExamByUserId($user['id']);
 //   var_dump($exams);
 //   die();
+if (!isset($_SESSION['user']['id']))
+  header("Location: /login");
+require 'topnavigation.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
