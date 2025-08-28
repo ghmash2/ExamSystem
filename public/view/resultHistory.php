@@ -41,11 +41,15 @@ require 'topnavigation.php';
 
 <body>
     <h2 class="section-title">Exam Details: <?= $examController->getExamNameById($exam_id) ?></h2>
-    <?php foreach ($attempts as $attempt): ?>
+    <?php foreach ($attempts['id'] as $attempt): ?>
 
         <?php $rows = $resultController->getResultOfEachQuestion($attempt['id']); ?>
         <div class="container">
-            <div class="">Attempt No: <?= $count-- ?></div>
+            <div style="display: flex; justify-content: space-between;">
+                <span>Attempt No: <?= $count-- ?></span>
+                <span>Attempted Date: <?= "date" ?></span>
+                <span>Mark: <?= "date" ?></span>
+            </div>
             <table class="questions-table">
                 <thead>
                     <tr>

@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_POST['user_id'];
     $exam_id = $_POST['exam_id'];
     $login_required = $_POST['is_login_required'];
+    $time = date("Y-m-d H:i:s", time());
     $answers = [];
     $total = 0;
     foreach ($_POST as $key => $value) {
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $correct++;
     }
     if ($login_required) {
-        $resultController->saveUserAnswer($user_id, $exam_id, $answers, $total, $correct);
+        $resultController->saveUserAnswer($user_id, $exam_id, $answers, $time, $correct);
     }
 }
 else{

@@ -8,7 +8,7 @@ class ResultController
     {
         $this->conn = $conn;
     }
-    function saveUserAnswer($user_id, $exam_id, $answers, $total, $correct)
+    function saveUserAnswer($user_id, $exam_id, $answers, $time, $correct)
     {
         $not_answered = 0;
         foreach ($answers as $answer) {
@@ -16,9 +16,9 @@ class ResultController
                 $not_answered++;
         }
         $stmt = $this->conn->prepare("INSERT INTO user_answer
-                (user_id, exam_id, correct_answer, not_answered) 
-                VALUES (:user_id, :exam_id, :correct_answer, :not_answered)");
-        $stmt->execute([":user_id" => $user_id, ":exam_id" => $exam_id, ":correct_answer" => $correct, ":not_answered" => $not_answered]);
+                (user_id, exam_id, correct_answer, not_answered, end_at) 
+                VALUES (:user_id, :exam_id, :correct_answer, :not_answered, :time)");
+        $stmt->execute([":user_id" => $user_id, ":exam_id" => $exam_id, ":correct_answer" => $correct, ":not_answered" => $not_answered, ":time" => $time]);
 
         $id = $this->conn->lastInsertId();
         $stmt = $this->conn->prepare("
@@ -45,7 +45,7 @@ class ResultController
     }
     function getExamsAttempts($user_id, $exam_id)
     {
-        $stmt = $this->conn->prepare("SELECT id FROM user_answer WHERE user_id=:user_id AND exam_id=:exam_id ORDER BY id DESC");
+        $stmt = $this->conn->prepare("SELECT id, end_at, correct_answer FROM user_answer WHERE user_id=:user_id AND exam_id=:exam_id ORDER BY id DESC");
         $stmt->execute([":user_id" => $user_id, ":exam_id" => $exam_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

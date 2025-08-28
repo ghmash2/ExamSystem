@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.header p {
+    color: #7f8c8d;
+    font-size: 1.1em;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    color: #3498db;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    font-weight: 500;
+    font-size: 1.4em;
+     background: #B4D4FF;
+}
+
+.required-field::after {
+    content: "*";
+    color: #e74c3c;
+    margin-left: 4px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+     background: #EEF5FF;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+     background: #EEF5FF;
+}
+
+.form-col {
+    flex: 1;
+    padding: 0 10px;
+    min-width: 250px;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="datetime-local"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+}
+
+.file-upload {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.file-upload-btn {
+    display: inline-block;
+    background: #176B87;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.file-upload-btn:hover {
+    background: #2980b9;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-name {
+    margin-top: 8px;
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+.instructions {
+    background-color: #e8f4fc;
+    border-left: 4px solid #3498db;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+}
+
+.instructions h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.step {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #3498db;
+    color: white;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+.preview-table {
+    margin-top: 25px;
+    display: none;
+    overflow-x: auto;
+}
+
+.preview-table h4 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #eaeaea;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f7fd;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    background: #176B87;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background: #28b6e6;
+}
+
+@media (max-width: 768px) {
+    .form-col {
+        flex: 100%;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"],
+    select {
+        padding: 10px 12px;
+    }
+}
