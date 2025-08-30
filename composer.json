@@ -1,0 +1,17 @@
+{
+    "name": "ooi/exam-system",
+    "autoload": {
+        "psr-4": {
+            "Ooi\\ExamSystem\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ghmash2",
+            "email": "mahmudpavel74@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^5.0"
+    }
+}

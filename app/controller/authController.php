@@ -27,6 +27,7 @@ class AuthController
           'username' => $user['username'],
           'image' => $user['photo'],
           'email' => $user['email'],
+          'type' => $user['type']
         ];
         header("Location: ..");
         exit();

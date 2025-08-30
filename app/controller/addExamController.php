@@ -1,11 +1,12 @@
 <?php
 namespace app\controller;
-require 'vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Exception;
 use PDO;
 use PDOException;
-class AuthController
+class AddExamController
 {
     private PDO $conn;
     public function __construct($conn)
@@ -19,22 +20,22 @@ class AuthController
         try {
 
             // Process form data
-            $examName = $_POST['exam_name'];
-            $tagline = $_POST['tagline'] ?? '';
-            $duration = $_POST['duration'];
-            $startTime = $_POST['start_time'];
-            $categoryId = $_POST['category'];
+            $examName = htmlspecialchars($_POST['exam_name']);
+            $tagline = htmlspecialchars($_POST['tagline'] ?? '');
+            $duration = htmlspecialchars($_POST['duration']);
+            $categoryId = htmlspecialchars($_POST['category']);
             $loginRequired = isset($_POST['login_required']) ? 1 : 0;
-
+             $startTime = htmlspecialchars($_POST['start_time']);
+            [$date, $tmp] = explode("T", $startTime);
+            $time = $date . " ". $tmp . ":00";
             // Handle file upload
             if (isset($_FILES['excel_file']) && $_FILES['excel_file']['error'] === UPLOAD_ERR_OK) {
                 $tmpName = $_FILES['excel_file']['tmp_name'];
 
-                // Insert exam into database
-                //$stmt = $this->conn->prepare("INSERT INTO exams (name, tagline, duration, start_time, category_id, is_login_required) 
-                              //VALUES (?, ?, ?, ?, ?, ?)");
-                //$stmt->execute([$examName, $tagline, $duration, $startTime, $categoryId, $loginRequired]);
-               // $examId = $this->conn->lastInsertId();
+                $stmt = $this->conn->prepare("INSERT INTO exams (title, tagline, duration, exam_date, exam_start_time, category_id, is_login_required) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $stmt->execute([$examName, $tagline, $duration, $date, $time, $categoryId, $loginRequired]);
+                $examId = $this->conn->lastInsertId();
 
                 // Load Excel file
                 $spreadsheet = IOFactory::load($tmpName);
@@ -53,28 +54,27 @@ class AuthController
 
                     if (!empty($question)) {
                         // Insert question
-                        //$stmt = $pdo->prepare("INSERT INTO exam_questions (exam_id, question, marks) VALUES (?, ?, ?)");
-                        $stmt->execute([$examId, $question, $marks]);
-                        $questionId = $pdo->lastInsertId();
+                        $stmt = $this->conn->prepare("INSERT INTO exam_question (exam_id, title) VALUES (?, ?)");
+                        $stmt->execute([$examId, $question]);
+                        $questionId = $this->conn->lastInsertId();
 
                         // Insert options
                         $options = [$option1, $option2, $option3, $option4];
                         foreach ($options as $index => $optionText) {
-                            $isCorrect = ($index + 1 == $correctAnswer) ? 1 : 0;
-                           // $stmt = $pdo->prepare("INSERT INTO question_options (question_id, option_text, is_correct) 
-                                         // VALUES (?, ?, ?)");
+                            $isCorrect = ($optionText == $correctAnswer) ? 1 : 0;
+                            $stmt = $this->conn->prepare("INSERT INTO options (question_id, title, is_correct) 
+                            VALUES (?, ?, ?)");
                             $stmt->execute([$questionId, $optionText, $isCorrect]);
                         }
                     }
                 }
-
-                echo json_encode(['success' => true, 'message' => 'Exam created successfully!', 'exam_id' => $examId]);
             } else {
                 throw new Exception('Please upload a valid Excel file.');
             }
         } catch (Exception $e) {
             http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            var_dump($e);
+            die();
         }
     }
 }

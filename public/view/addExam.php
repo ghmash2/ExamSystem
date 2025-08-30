@@ -1,5 +1,21 @@
+<?php 
+use app\controller\AddExamController;
+use function app\database\DataConnection;
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/../app/controller/addExamController.php';
+
+$conn = DataConnection();
+$addExamController = new AddExamController($conn);
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $addExamController->addExam();
+}
+require 'topnavigation.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +23,7 @@
     <title>Exam Creation System</title>
 
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -18,7 +35,8 @@
             <h3>How to prepare your Excel file:</h3>
             <div class="step">
                 <span class="step-number">1</span>
-                <span>Create an Excel file with these columns: <strong>Question, Option1, Option2, Option3, Option4, CorrectAnswer, Marks</strong></span>
+                <span>Create an Excel file with these columns: <strong>Question, Option1, Option2, Option3, Option4,
+                        CorrectAnswer, Marks</strong></span>
             </div>
             <div class="step">
                 <span class="step-number">2</span>
@@ -30,11 +48,11 @@
             </div>
         </div>
 
-        <form id="examForm" action="" method="POST" enctype="multipart/form-data">
+        <form id="form-exam" action="" method="POST" enctype="multipart/form-data">
             <!-- Basic Exam Information -->
             <div class="form-section">
                 <h2 class="section-title">Exam Information</h2>
-                
+
                 <div class="form-row">
                     <div class="form-col">
                         <label for="examName" class="required-field">Exam Name</label>
@@ -45,7 +63,7 @@
                         <input type="text" id="tagline" name="tagline">
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-col">
                         <label for="duration" class="required-field">Duration (minutes)</label>
@@ -61,13 +79,18 @@
                             <option value="">Select Category</option>
                             <option value="1">Mathematics</option>
                             <option value="2">English</option>
-                            <option value="3">Science</option>
-                            <option value="4">History</option>
+                            <option value="3">History</option>
+                            <option value="4">Language</option>
                             <option value="5">Technology</option>
                         </select>
                     </div>
                 </div>
-                
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="instruction" class="required-field" >Instruction</label>
+                        <input type="text" id="instruction" name="instruction" style="height: 100px">
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="checkbox-group">
                         <input type="checkbox" id="loginRequired" name="login_required" value="1">
@@ -79,7 +102,7 @@
             <!-- Questions Upload Section -->
             <div class="form-section">
                 <h2 class="section-title">Exam Questions</h2>
-                
+
                 <div class="form-group">
                     <label for="excelFile" class="required-field">Upload Questions Excel File</label>
                     <div class="file-upload">
@@ -88,8 +111,31 @@
                     </div>
                     <div id="fileLabel" class="file-name">No file chosen</div>
                 </div>
-                
-                <div id="filePreview" class="preview-table">
+
+            </div>
+            <button type="submit" class="submit-btn" name="examForm">Create Exam</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
+<script>
+ // Update file label when a file is selected
+ const fileInput = document.getElementById('excelFile');
+const fileLabel = document.getElementById('fileLabel');          
+ fileInput.addEventListener('change', function () {
+                if (this.files.length > 0) {
+                    fileLabel.textContent = this.files[0].name;
+                    //simulateExcelPreview();
+                } else {
+                    fileLabel.textContent = 'No file chosen';
+                    //previewSection.style.display = 'none';
+                }
+            });
+</script>
+
+<!-- <div id="filePreview" class="preview-table">
                     <h4>Preview (First 5 questions):</h4>
                     <div class="table-container">
                         <table>
@@ -105,55 +151,36 @@
                                 </tr>
                             </thead>
                             <tbody id="previewBody">
-                                <!-- Preview will be inserted here by JavaScript -->
+                                 Preview will be inserted here by JavaScript 
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-btn">Create Exam</button>
-        </form>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileInput = document.getElementById('excelFile');
-            const fileLabel = document.getElementById('fileLabel');
+                </div> -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+           
             const previewSection = document.getElementById('filePreview');
             const previewBody = document.getElementById('previewBody');
-            
-            // Update file label when a file is selected
-            fileInput.addEventListener('change', function() {
-                if (this.files.length > 0) {
-                    fileLabel.textContent = this.files[0].name;
-                    // In a real application, you would parse the Excel file here
-                    // and show a preview. For this example, we'll simulate it.
-                    simulateExcelPreview();
-                } else {
-                    fileLabel.textContent = 'No file chosen';
-                    previewSection.style.display = 'none';
-                }
-            });
-            
+
             // Form validation
-            document.getElementById('examForm').addEventListener('submit', function(e) {
+            document.getElementById('examForm').addEventListener('submit', function (e) {
                 const examName = document.getElementById('examName').value;
                 const duration = document.getElementById('duration').value;
                 const startTime = document.getElementById('startTime').value;
                 const category = document.getElementById('category').value;
                 const excelFile = document.getElementById('excelFile').files[0];
-                
+
                 if (!examName || !duration || !startTime || !category || !excelFile) {
                     e.preventDefault();
                     alert('Please fill in all required fields.');
                 }
             });
-            
+
             // Simulate Excel file preview (in a real app, you would use a library like SheetJS)
             function simulateExcelPreview() {
                 previewBody.innerHTML = '';
-                
+
                 // Sample data for demonstration
                 const sampleData = [
                     ['What is 2 + 2?', '3', '4', '5', '6', '2', '1'],
@@ -162,7 +189,7 @@
                     ['2 × 3 = ?', '4', '5', '6', '7', '3', '1'],
                     ['HTML stands for?', 'Hyperlinks', 'Hypertext Markup Language', 'Home Tool', 'Hyper Text', '2', '1']
                 ];
-                
+
                 sampleData.forEach(row => {
                     const tr = document.createElement('tr');
                     row.forEach(cell => {
@@ -172,10 +199,8 @@
                     });
                     previewBody.appendChild(tr);
                 });
-                
+
                 previewSection.style.display = 'block';
             }
         });
-    </script>
-</body>
-</html>
+    </script> -->
